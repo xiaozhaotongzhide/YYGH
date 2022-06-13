@@ -1,9 +1,13 @@
 package com.example.yygh.user.config;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
-//@Configuration
-//@MapperScan("")
-//public class UserConfig {
-//}
+@Configuration
+public class UserConfig {
+    @Bean
+    RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+}
