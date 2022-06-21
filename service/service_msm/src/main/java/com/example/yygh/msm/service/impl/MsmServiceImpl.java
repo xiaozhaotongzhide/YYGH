@@ -1,6 +1,6 @@
-package com.example.yygh.msm.Service.impl;
+package com.example.yygh.msm.service.impl;
 
-import com.example.yygh.msm.Service.MsmService;
+import com.example.yygh.msm.service.MsmService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

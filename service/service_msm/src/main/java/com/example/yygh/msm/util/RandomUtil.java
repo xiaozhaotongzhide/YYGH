@@ -1,4 +1,4 @@
-package com.example.yygh.msm.Util;
+package com.example.yygh.msm.util;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

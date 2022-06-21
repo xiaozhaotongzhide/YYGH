@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.yygh.common.helper.JwtHelper;
 import com.example.yygh.common.result.Result;
 import com.example.yygh.model.user.UserInfo;
-import com.example.yygh.user.Service.UserInfoService;
+import com.example.yygh.user.service.UserInfoService;
 import com.example.yygh.user.utils.ConstantWxPropertiesUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
