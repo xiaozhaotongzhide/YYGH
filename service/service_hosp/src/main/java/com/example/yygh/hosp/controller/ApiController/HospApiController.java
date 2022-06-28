@@ -67,6 +67,18 @@ public class HospApiController {
         return Result.ok(list);
     }
 
+    @GetMapping("inner/getScheduleOrderVo/{scheduleId}")
+    public ScheduleOrderVo getScheduleOrderVo(@PathVariable String scheduleId) {
+        return scheduleService.getScheduleOrderVo(scheduleId);
+    }
+
+    @GetMapping("inner/getSignInfoVo/{hoscode}")
+    public SignInfoVo getSignInfoVo(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable("hoscode") String hoscode) {
+        return hospitalSetService.getSignInfoVo(hoscode);
+    }
+
     @ApiOperation(value = "根据医院编号获取医院详情")
     @GetMapping("findHospDetail/{hoscode}")
     public Result item(@PathVariable(value = "hoscode") String hoscode) {

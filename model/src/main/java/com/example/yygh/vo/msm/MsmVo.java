@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 @ApiModel(description = "短信实体")
-public class MsmVo {
+public class MsmVo implements Serializable{
 
     @ApiModelProperty(value = "phone")
     private String phone;

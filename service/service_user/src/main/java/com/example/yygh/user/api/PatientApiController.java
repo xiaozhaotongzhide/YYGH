@@ -55,4 +55,10 @@ public class PatientApiController {
         patientService.removeById(id);
         return Result.ok();
     }
+
+    //通过feign根据id获取就诊人信息
+    @GetMapping("/inner/get/{id}")
+    public Patient innerFindByid(@PathVariable("id") Long id){
+        return patientService.getPatientId(id);
+    }
 }
