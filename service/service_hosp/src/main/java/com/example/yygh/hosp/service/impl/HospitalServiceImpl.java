@@ -1,7 +1,7 @@
 package com.example.yygh.hosp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.yygh.cmn.clent.DictFeignClient;
+import com.example.yygh.cmn.client.DictFeignClient;
 import com.example.yygh.hosp.repository.HospitalRepository;
 import com.example.yygh.hosp.service.HospitalService;
 import com.example.yygh.model.hosp.Hospital;
@@ -98,9 +98,9 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospital1 = this.setHospitalHosType(hospital);
         Map<String, Object> map = new HashMap<>();
         //医院基本信息
-        map.put("hospital",hospital);
+        map.put("hospital", hospital);
         //医院的预约信息
-        map.put("bookingRule",hospital1.getBookingRule());
+        map.put("bookingRule", hospital1.getBookingRule());
         return map;
     }
 
@@ -120,9 +120,9 @@ public class HospitalServiceImpl implements HospitalService {
         HashMap<String, Object> map = new HashMap<>();
         //获取医院详情
         Hospital hospital = this.setHospitalHosType(this.getByHoscode(hoscode));
-        map.put("hospital",hospital);
+        map.put("hospital", hospital);
         //预约规则
-        map.put("bookingRule",hospital.getBookingRule());
+        map.put("bookingRule", hospital.getBookingRule());
         hospital.setBookingRule(null);
         return map;
     }

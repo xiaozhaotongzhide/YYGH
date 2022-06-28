@@ -2,7 +2,7 @@ package com.example.yygh.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.yygh.cmn.clent.DictFeignClient;
+import com.example.yygh.cmn.client.DictFeignClient;
 import com.example.yygh.enums.DictEnum;
 import com.example.yygh.model.user.Patient;
 import com.example.yygh.user.mapper.PatientMapper;
