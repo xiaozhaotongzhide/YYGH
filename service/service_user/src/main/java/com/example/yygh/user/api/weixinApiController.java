@@ -56,7 +56,7 @@ public class weixinApiController {
             //用户昵称
             String nickname = userVoObject.getString("nickname");
             //用于昵称是windows1252格式转换为utf-8
-            nickname = new String(nickname.getBytes("windows-1256"),"UTF-8");
+            nickname = new String(nickname.getBytes("windows-1256"), "UTF-8");
             log.info("nickname为" + nickname);
             //用户头像
             String headimgurl = jsonObject.getString("headimgurl");
@@ -91,6 +91,7 @@ public class weixinApiController {
         //使用jwt生成token
         String token = JwtHelper.createToken(userInfo.getId(), name);
         map.put("token", token);
+        log.info((String) map.get("openid"));
         return "redirect:" + ConstantWxPropertiesUtils.YYGH_BASE_URL + "/weixin/callback?token=" + map.get("token") + "&openid=" + map.get("openid") + "&name=" + URLEncoder.encode((String) map.get("name"), "utf-8");
     }
 
