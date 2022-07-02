@@ -347,6 +347,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         //把获取的数据设置到scheduleOrderVo
         BeanUtils.copyProperties(schedule, scheduleOrderVo);
+        scheduleOrderVo.setReserveDate(schedule.getWorkDate());
         scheduleOrderVo.setReserveTime(schedule.getWorkTime());
         scheduleOrderVo.setHosname(hospitalService.getHospName(schedule.getHoscode()));
         scheduleOrderVo.setDepname(departmentService.getDepName(schedule.getHoscode(), schedule.getDepcode()));
