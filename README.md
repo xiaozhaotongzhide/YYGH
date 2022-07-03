@@ -5,7 +5,7 @@
 
 ##### 项目架构图
 
-![YYGH架构图](http://cdn.zhaodapiaoliang.top/PicGo/YYGH%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![image-20220703212142381](http://cdn.zhaodapiaoliang.top/PicGo/image-20220703212142381.png)
 
 项目笔记
 
