@@ -17,6 +17,7 @@
         <module>service_msm</module>
         <module>service_order</module>
         <module>service_task</module>
+        <module>service_sta</module>
     </modules>
     <artifactId>service</artifactId>
 

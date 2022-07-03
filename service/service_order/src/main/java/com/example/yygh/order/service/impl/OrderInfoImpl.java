@@ -20,18 +20,19 @@ import com.example.yygh.rabbit.service.RabbitService;
 import com.example.yygh.user.client.PatientFeignClient;
 import com.example.yygh.vo.hosp.ScheduleOrderVo;
 import com.example.yygh.vo.msm.MsmVo;
-import com.example.yygh.vo.order.OrderMqVo;
-import com.example.yygh.vo.order.OrderQueryVo;
-import com.example.yygh.vo.order.SignInfoVo;
+import com.example.yygh.vo.order.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderInfoImpl extends ServiceImpl<OrderMapper, OrderInfo> implements OrderService {
@@ -103,27 +104,25 @@ public class OrderInfoImpl extends ServiceImpl<OrderMapper, OrderInfo> implement
         String reserveDate = orderQueryVo.getReserveDate();//安排时间
         String createTimeBegin = orderQueryVo.getCreateTimeBegin();
         String createTimeEnd = orderQueryVo.getCreateTimeEnd();
-
-
         //对条件值进行非空判断
         QueryWrapper<OrderInfo> wrapper = new QueryWrapper<>();
-        if(!StringUtils.isEmpty(name)) {
-            wrapper.like("hosname",name);
+        if (!StringUtils.isEmpty(name)) {
+            wrapper.like("hosname", name);
         }
-        if(!StringUtils.isEmpty(patientId)) {
-            wrapper.eq("patient_id",patientId);
+        if (!StringUtils.isEmpty(patientId)) {
+            wrapper.eq("patient_id", patientId);
         }
-        if(!StringUtils.isEmpty(orderStatus)) {
-            wrapper.eq("order_status",orderStatus);
+        if (!StringUtils.isEmpty(orderStatus)) {
+            wrapper.eq("order_status", orderStatus);
         }
-        if(!StringUtils.isEmpty(reserveDate)) {
-            wrapper.ge("reserve_date",reserveDate);
+        if (!StringUtils.isEmpty(reserveDate)) {
+            wrapper.ge("reserve_date", reserveDate);
         }
-        if(!StringUtils.isEmpty(createTimeBegin)) {
-            wrapper.ge("create_time",createTimeBegin);
+        if (!StringUtils.isEmpty(createTimeBegin)) {
+            wrapper.ge("create_time", createTimeBegin);
         }
-        if(!StringUtils.isEmpty(createTimeEnd)) {
-            wrapper.le("create_time",createTimeEnd);
+        if (!StringUtils.isEmpty(createTimeEnd)) {
+            wrapper.le("create_time", createTimeEnd);
         }
         //调用mapper的方法
         IPage<OrderInfo> pages = baseMapper.selectPage(pageParams, wrapper);
@@ -132,6 +131,53 @@ public class OrderInfoImpl extends ServiceImpl<OrderMapper, OrderInfo> implement
             this.packOrderInfo(item);
         });
         return pages;
+    }
+
+    @Override
+    public void patientTips() {
+        QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("reserve_date", new DateTime().toString("yyyy-MM-dd"));
+        queryWrapper.ne("order_status", OrderStatusEnum.CANCLE.getStatus());
+        List<OrderInfo> orderInfos = baseMapper.selectList(queryWrapper);
+        for (OrderInfo orderInfo : orderInfos) {
+            //短信提示
+            MsmVo msmVo = new MsmVo();
+            msmVo.setPhone(orderInfo.getPatientPhone());
+            String reserveDate = new DateTime(orderInfo.getReserveDate()).toString("yyyy-MM-dd") + (orderInfo.getReserveTime() == 0 ? "上午" : "下午");
+            Map<String, Object> param = new HashMap<String, Object>() {{
+                put("title", orderInfo.getHosname() + "|" + orderInfo.getDepname() + "|" + orderInfo.getTitle());
+                put("reserveDate", reserveDate);
+                put("name", orderInfo.getPatientName());
+            }};
+            msmVo.setParam(param);
+            rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_MSM, MqConst.ROUTING_MSM_ITEM, msmVo);
+        }
+    }
+
+    @Override
+    public Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo) {
+        Map<String, Object> map = new HashMap<>();
+        List<OrderCountVo> orderCountVos = baseMapper.selectOrderCount(orderCountQueryVo);
+        //日期列表
+        List<String> dateList = orderCountVos.stream().map(OrderCountVo::getReserveDate).collect(Collectors.toList());
+        //统计列表
+        List<Integer> countList = orderCountVos.stream().map(OrderCountVo::getCount).collect(Collectors.toList());
+        map.put("dateList", dateList);
+        map.put("countList", countList);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getAmount(OrderCountQueryVo orderCountQueryVo) {
+        Map<String, Object> map = new HashMap<>();
+        List<OrderAmountVo> orderCountVos = baseMapper.selectOrderAmount(orderCountQueryVo);
+        //日期列表
+        List<String> dateList = orderCountVos.stream().map(OrderAmountVo::getReserveDate).collect(Collectors.toList());
+        //统计列表
+        List<BigDecimal> amountList = orderCountVos.stream().map(OrderAmountVo::getAmount).collect(Collectors.toList());
+        map.put("dateList", dateList);
+        map.put("amountList", amountList);
+        return map;
     }
 
     private OrderInfo packOrderInfo(OrderInfo orderInfo) {

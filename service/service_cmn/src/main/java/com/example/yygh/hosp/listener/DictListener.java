@@ -14,6 +14,7 @@ public class DictListener extends AnalysisEventListener<DictEeVo> {
 
 
     private DictMapper dictMapper;
+
     public DictListener(DictMapper dictMapper) {
         this.dictMapper = dictMapper;
     }

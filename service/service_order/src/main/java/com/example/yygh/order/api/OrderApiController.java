@@ -8,6 +8,7 @@ import com.example.yygh.enums.OrderStatusEnum;
 import com.example.yygh.model.order.OrderInfo;
 import com.example.yygh.model.user.UserInfo;
 import com.example.yygh.order.service.OrderService;
+import com.example.yygh.vo.order.OrderCountQueryVo;
 import com.example.yygh.vo.order.OrderQueryVo;
 import com.example.yygh.vo.user.UserInfoQueryVo;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/order/orderInfo")
@@ -56,4 +58,23 @@ public class OrderApiController {
         return Result.ok(OrderStatusEnum.getStatusList());
     }
 
+    /**
+     * 统计每天的预约数
+     * @param orderCountQueryVo
+     * @return
+     */
+    @PostMapping("inner/getCountMap")
+    public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderService.getCountMap(orderCountQueryVo);
+    }
+
+    /**
+     * 统计每天的金额数
+     * @param orderCountQueryVo
+     * @return
+     */
+    @PostMapping("inner/getAmount")
+    public Map<String, Object> getAmount(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderService.getAmount(orderCountQueryVo);
+    }
 }
