@@ -141,11 +141,11 @@ ECharts：表格渲染
 
 下载中心的设计类似于这样会有一个导出的功能
 
-![image-20220703181352728](C:\Users\86157\AppData\Roaming\Typora\typora-user-images\image-20220703181352728.png)
+![image-20220703181352728](http://cdn.zhaodapiaoliang.top/PicGo/image-20220703181352728.png)
 
 在导出之前有这样的查询,可以根据日期和医院名称下载对应的消费报表
 
-![image-20220703181428979](C:\Users\86157\AppData\Roaming\Typora\typora-user-images\image-20220703181428979.png)
+![image-20220703181428979](http://cdn.zhaodapiaoliang.top/PicGo/image-20220703181428979.png)
 
 这里说一下我的思路
 
