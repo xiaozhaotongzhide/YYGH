@@ -22,4 +22,9 @@ public interface HospitalFeignClient {
     @GetMapping("/api/hosp/hospital/inner/getSignInfoVo/{hoscode}")
     SignInfoVo getSignInfoVo(@PathVariable("hoscode") String hoscode);
 
+    /**
+     * 获取医院编号
+     */
+    @GetMapping("/api/hosp/hospital/inner/getHoscode")
+    public String getHoscode(String hosname);
 }

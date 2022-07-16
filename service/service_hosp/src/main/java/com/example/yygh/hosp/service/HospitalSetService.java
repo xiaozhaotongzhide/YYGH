@@ -8,4 +8,6 @@ public interface HospitalSetService extends IService<HospitalSet> {
     String getSingKey(String hoscode);
 
     SignInfoVo getSignInfoVo(String hoscode);
+
+    String getHoscode(String hosname);
 }

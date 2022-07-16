@@ -22,7 +22,12 @@ public class MqConst {
     public static final String ROUTING_TASK_8 = "task.8";
     //队列
     public static final String QUEUE_TASK_8 = "queue.task.8";
-
+    /**
+     * 定时下载任务
+     */
+    public static final String ROUTING_TASK_7 = "task.7";
+    //队列
+    public static final String QUEUE_TASK_7 = "queue.task.7";
 
 }
 

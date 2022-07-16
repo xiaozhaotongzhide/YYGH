@@ -1,10 +1,14 @@
 package com.example.yygh.order.client;
 
+import com.example.yygh.model.order.OrderInfo;
+import com.example.yygh.model.oss.Download;
+import com.example.yygh.vo.download.DownloadCountQueryVo;
 import com.example.yygh.vo.order.OrderCountQueryVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,5 +29,13 @@ public interface OrderFeignClient {
      */
     @PostMapping("/api/order/orderInfo/inner/getAmount")
     public Map<String, Object> getAmunt(@RequestBody OrderCountQueryVo orderCountQueryVo);
+
+    /**
+     * oss模块下载的数据
+     * @param download
+     * @return
+     */
+    @PostMapping("/api/order/orderInfo/inner/getDownload")
+    public List<OrderInfo> getDownload(@RequestBody Download download);
 
 }

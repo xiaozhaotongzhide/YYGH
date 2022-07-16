@@ -6,8 +6,10 @@ import com.example.yygh.common.result.Result;
 import com.example.yygh.common.utils.AuthContextHolder;
 import com.example.yygh.enums.OrderStatusEnum;
 import com.example.yygh.model.order.OrderInfo;
+import com.example.yygh.model.oss.Download;
 import com.example.yygh.model.user.UserInfo;
 import com.example.yygh.order.service.OrderService;
+import com.example.yygh.vo.download.DownloadCountQueryVo;
 import com.example.yygh.vo.order.OrderCountQueryVo;
 import com.example.yygh.vo.order.OrderQueryVo;
 import com.example.yygh.vo.user.UserInfoQueryVo;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,7 +32,7 @@ public class OrderApiController {
     @PostMapping("auth/submitOrder/{scheduleId}/{patientId}")
     public Result saveOrder(@PathVariable String scheduleId,
                             @PathVariable Long patientId) {
-        Long orderId = orderService.saveOrder(scheduleId,patientId);
+        Long orderId = orderService.saveOrder(scheduleId, patientId);
         return Result.ok(orderId);
     }
 
@@ -60,6 +63,7 @@ public class OrderApiController {
 
     /**
      * 统计每天的预约数
+     *
      * @param orderCountQueryVo
      * @return
      */
@@ -70,11 +74,18 @@ public class OrderApiController {
 
     /**
      * 统计每天的金额数
+     *
      * @param orderCountQueryVo
      * @return
      */
     @PostMapping("inner/getAmount")
     public Map<String, Object> getAmount(@RequestBody OrderCountQueryVo orderCountQueryVo) {
         return orderService.getAmount(orderCountQueryVo);
+    }
+
+    @PostMapping("inner/getDownload")
+    public List<OrderInfo> getDownload(@RequestBody Download download) {
+        List<OrderInfo> orderInfoList = orderService.getDownload(download);
+        return orderInfoList;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.yygh.hosp.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.yygh.hosp.mapper.HospitalSetMapper;
@@ -15,7 +16,7 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
     @Override
     public String getSingKey(String hoscode) {
         QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
-        wrapper.eq("hoscode",hoscode);
+        wrapper.eq("hoscode", hoscode);
 
         HospitalSet hospitalSet = baseMapper.selectOne(wrapper);
 
@@ -31,5 +32,12 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
         signInfoVo.setApiUrl(hospitalSet.getApiUrl());
         signInfoVo.setSignKey(hospitalSet.getSignKey());
         return signInfoVo;
+    }
+
+    @Override
+    public String getHoscode(String hosname) {
+        QueryWrapper<HospitalSet> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("hosname", hosname);
+        return baseMapper.selectOne(queryWrapper).getHoscode();
     }
 }

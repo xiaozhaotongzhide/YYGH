@@ -27,6 +27,17 @@ public class ScheduledTask {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         log.info("定时任务开始执行" + sdf.format(date));
-        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_8, "start");
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_8, "startPatient");
+    }
+
+    /**
+     * 定时下载任务
+     */
+    @Scheduled(cron = "0 */1 * * * ?")
+    public void taskDownload() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        log.info("定时任务开始执行" + sdf.format(date));
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_7, "startDownload");
     }
 }

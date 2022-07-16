@@ -11,6 +11,7 @@ import com.example.yygh.common.result.ResultCodeEnum;
 import com.example.yygh.enums.OrderStatusEnum;
 import com.example.yygh.hosp.client.HospitalFeignClient;
 import com.example.yygh.model.order.OrderInfo;
+import com.example.yygh.model.oss.Download;
 import com.example.yygh.model.user.Patient;
 import com.example.yygh.model.user.UserInfo;
 import com.example.yygh.order.mapper.OrderMapper;
@@ -18,6 +19,7 @@ import com.example.yygh.order.service.OrderService;
 import com.example.yygh.rabbit.constant.MqConst;
 import com.example.yygh.rabbit.service.RabbitService;
 import com.example.yygh.user.client.PatientFeignClient;
+import com.example.yygh.vo.download.DownloadCountQueryVo;
 import com.example.yygh.vo.hosp.ScheduleOrderVo;
 import com.example.yygh.vo.msm.MsmVo;
 import com.example.yygh.vo.order.*;
@@ -178,6 +180,25 @@ public class OrderInfoImpl extends ServiceImpl<OrderMapper, OrderInfo> implement
         map.put("dateList", dateList);
         map.put("amountList", amountList);
         return map;
+    }
+
+    /**
+     * 这个方法就会获取我们需要下载的内容
+     * @param download
+     * @return
+     */
+    @Override
+    public List<OrderInfo> getDownload(Download download) {
+        QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("hoscode", download.getHoscode());
+        if (!StringUtils.isEmpty(download.getDownloadDateBegin())) {
+            queryWrapper.ge("create_time", download.getDownloadDateBegin());
+        }
+        if (!StringUtils.isEmpty(download.getDownloadDateEnd())) {
+            queryWrapper.le("create_time", download.getDownloadDateEnd());
+        }
+        List<OrderInfo> orderInfoList = baseMapper.selectList(queryWrapper);
+        return orderInfoList;
     }
 
     private OrderInfo packOrderInfo(OrderInfo orderInfo) {
