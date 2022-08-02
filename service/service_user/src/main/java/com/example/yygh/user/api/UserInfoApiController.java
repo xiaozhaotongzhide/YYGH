@@ -7,6 +7,7 @@ import com.example.yygh.user.service.UserInfoService;
 import com.example.yygh.vo.user.LoginVo;
 import com.example.yygh.vo.user.UserAuthVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,5 +41,11 @@ public class UserInfoApiController {
         //在方法中传入两个参数,用户id和认证数据的ovid
         UserInfo byId = userInfoService.getById(AuthContextHolder.getUserId(request));
         return Result.ok(byId);
+    }
+
+    @Cacheable(value = "userInfo",keyGenerator = "keyGenerator")
+    @GetMapping("getUserInfo/{id}")
+    public UserInfo getUserInfo(@PathVariable("id") Long id){
+        return userInfoService.getById(id);
     }
 }

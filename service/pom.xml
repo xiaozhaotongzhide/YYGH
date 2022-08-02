@@ -18,6 +18,7 @@
         <module>service_order</module>
         <module>service_task</module>
         <module>service_sta</module>
+        <module>service_chat</module>
     </modules>
     <artifactId>service</artifactId>
 

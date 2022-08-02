@@ -19,7 +19,6 @@ import com.example.yygh.order.service.OrderService;
 import com.example.yygh.rabbit.constant.MqConst;
 import com.example.yygh.rabbit.service.RabbitService;
 import com.example.yygh.user.client.PatientFeignClient;
-import com.example.yygh.vo.download.DownloadCountQueryVo;
 import com.example.yygh.vo.hosp.ScheduleOrderVo;
 import com.example.yygh.vo.msm.MsmVo;
 import com.example.yygh.vo.order.*;
