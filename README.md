@@ -167,5 +167,16 @@ ECharts：表格渲染
 
 9.前端下载中心可以通过请求获取下载中心的数据。
 
+### 后续完善的功能
 
+下载中心
 
+[YYGH-12-下载中心_小赵呢的博客-CSDN博客](https://blog.csdn.net/weixin_53227758/article/details/125711797)
+
+客服中心
+
+[YYGH-13-客服中心_小赵呢的博客-CSDN博客](https://blog.csdn.net/weixin_53227758/article/details/126141982)
+
+监测中心
+
+[YYGH-14-监测中心_小赵呢的博客-CSDN博客](https://blog.csdn.net/weixin_53227758/article/details/126441994)
