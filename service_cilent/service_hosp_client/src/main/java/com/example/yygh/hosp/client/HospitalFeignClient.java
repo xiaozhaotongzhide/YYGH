@@ -27,4 +27,17 @@ public interface HospitalFeignClient {
      */
     @GetMapping("/api/hosp/hospital/inner/getHoscode")
     public String getHoscode(String hosname);
+
+    /**
+     * hosp模块堆内存占用情况
+     */
+    @GetMapping("/actuator/metrics/jvm.memory.used?tag=area:heap")
+    public String getRam();
+
+    /**
+     * hosp模块内存占用率
+     * @return
+     */
+    @GetMapping("/actuator/metrics/system.cpu.usage")
+    public String getCpu();
 }

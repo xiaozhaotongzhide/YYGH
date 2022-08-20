@@ -8,6 +8,7 @@
         <module>common</module>
         <module>service_cilent</module>
         <module>service_gateway</module>
+        <module>service_cilent/service_task_client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

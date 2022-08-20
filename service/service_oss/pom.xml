@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>service-order-client</artifactId>
+            <artifactId>service_order_client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

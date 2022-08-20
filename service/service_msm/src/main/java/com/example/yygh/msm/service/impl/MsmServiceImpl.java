@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 @Service
@@ -45,10 +46,23 @@ public class MsmServiceImpl implements MsmService {
         if (StringUtils.isEmpty(msmVo.getPhone())) {
             return;
         }
+
+        if (!ObjectUtils.isEmpty(msmVo.getParam().get("static")) && msmVo.getParam().get("static").equals("actuator")) {
+            sendActuator(msmVo);
+        }
         //1.创建一个简单的的消息邮件
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setSubject(msmVo.getParam().get("title") + "预约成功");
-        simpleMailMessage.setText(msmVo.getParam().get("name") + "的预约成功请于" + msmVo.getParam().get("reserveDate") + "到医院就诊" );
+        simpleMailMessage.setText(msmVo.getParam().get("name") + "的预约成功请于" + msmVo.getParam().get("reserveDate") + "到医院就诊");
+        simpleMailMessage.setTo(msmVo.getPhone());
+        simpleMailMessage.setFrom("2590416618@qq.com");
+        javaMailSenderImpl.send(simpleMailMessage);
+    }
+
+    private void sendActuator(MsmVo msmVo) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setSubject(msmVo.getParam().get("title") + "服务器报警");
+        simpleMailMessage.setText(msmVo.getParam().get("service") + "服务器报警请即使处理");
         simpleMailMessage.setTo(msmVo.getPhone());
         simpleMailMessage.setFrom("2590416618@qq.com");
         javaMailSenderImpl.send(simpleMailMessage);

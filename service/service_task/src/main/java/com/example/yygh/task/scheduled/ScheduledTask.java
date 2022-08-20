@@ -40,4 +40,12 @@ public class ScheduledTask {
         log.info("定时任务开始执行" + sdf.format(date));
         rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_7, "startDownload");
     }
+
+    @Scheduled(cron = "0 */1 * * * ?")
+    public void taskActuator() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        log.info("定时任务开始执行" + sdf.format(date));
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_6, "startActuator");
+    }
 }

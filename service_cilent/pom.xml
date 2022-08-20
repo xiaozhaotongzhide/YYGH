@@ -16,6 +16,11 @@
         <module>service_user_client</module>
         <module>service_hosp_client</module>
         <module>service-order-client</module>
+        <module>service_sta_client</module>
+        <module>service_chat_client</module>
+        <module>service_oss_client</module>
+        <module>service_task_client</module>
+        <module>service_msm_client</module>
     </modules>
 
     <properties>
