@@ -6,8 +6,6 @@ import com.example.yygh.hosp.mapper.DictMapper;
 import com.example.yygh.model.cmn.Dict;
 import com.example.yygh.vo.cmn.DictEeVo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 
 public class DictListener extends AnalysisEventListener<DictEeVo> {

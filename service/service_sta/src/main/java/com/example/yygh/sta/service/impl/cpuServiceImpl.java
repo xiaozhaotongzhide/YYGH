@@ -38,6 +38,7 @@ public class cpuServiceImpl extends ServiceImpl<cpuMapper, CpuEntity> implements
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("title", cpuEntity.getServiceName() + "cpu");
                 map.put("service", cpuEntity.getServiceName() + "cpu");
+                map.put("static", "actuator");
                 msmVo.setParam(map);
                 msmVo.setPhone("2590416618@qq.com");
                 rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_MSM, MqConst.ROUTING_MSM_ITEM, msmVo);

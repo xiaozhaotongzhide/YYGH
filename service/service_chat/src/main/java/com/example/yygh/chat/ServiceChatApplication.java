@@ -8,8 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
 @EnableDiscoveryClient//注册服务
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)

@@ -49,6 +49,7 @@ public class MsmServiceImpl implements MsmService {
 
         if (!ObjectUtils.isEmpty(msmVo.getParam().get("static")) && msmVo.getParam().get("static").equals("actuator")) {
             sendActuator(msmVo);
+            return;
         }
         //1.创建一个简单的的消息邮件
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
