@@ -7,7 +7,10 @@ import com.example.yygh.model.act.CouponAdmin;
 import com.example.yygh.vo.act.CouponAdminVo;
 import com.example.yygh.vo.act.SignTaskAdminVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -18,6 +21,11 @@ import java.util.Date;
  */
 @Service
 public class CouponAdminServiceImpl extends ServiceImpl<CouponAdminMapper, CouponAdmin> implements CouponAdminService {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    private static final String SECKILL_STOCK_KEY ="seckill:stock:";
 
     @Override
     public Boolean update(CouponAdminVo couponAdminVo) {
@@ -32,6 +40,7 @@ public class CouponAdminServiceImpl extends ServiceImpl<CouponAdminMapper, Coupo
     }
 
     @Override
+    @Transactional
     public Boolean saveCouponAdmin(CouponAdminVo couponAdminVo) {
         CouponAdmin couponAdmin = new CouponAdmin();
         BeanUtils.copyProperties(couponAdminVo, couponAdmin);
@@ -39,11 +48,8 @@ public class CouponAdminServiceImpl extends ServiceImpl<CouponAdminMapper, Coupo
         couponAdmin.setUpdateTime(new Date());
         couponAdmin.setIsDeleted(0);
         int insert = baseMapper.insert(couponAdmin);
-        if (insert > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        stringRedisTemplate.opsForValue().set(SECKILL_STOCK_KEY + couponAdmin.getId(), couponAdmin.getInventory().toString());
+        return insert > 0;
     }
 
     @Override

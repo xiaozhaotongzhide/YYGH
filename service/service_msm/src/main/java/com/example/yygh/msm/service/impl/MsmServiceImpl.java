@@ -33,7 +33,7 @@ public class MsmServiceImpl implements MsmService {
         simpleMailMessage.setSubject("正在登录YYGH系统");
         simpleMailMessage.setText("验证码:" + code);
         simpleMailMessage.setTo(phone);
-        simpleMailMessage.setFrom("2590416618@qq.com");
+        simpleMailMessage.setFrom("m15733258105@163.com");
         javaMailSenderImpl.send(simpleMailMessage);
     }
 
@@ -56,7 +56,7 @@ public class MsmServiceImpl implements MsmService {
         simpleMailMessage.setSubject(msmVo.getParam().get("title") + "预约成功");
         simpleMailMessage.setText(msmVo.getParam().get("name") + "的预约成功请于" + msmVo.getParam().get("reserveDate") + "到医院就诊");
         simpleMailMessage.setTo(msmVo.getPhone());
-        simpleMailMessage.setFrom("2590416618@qq.com");
+        simpleMailMessage.setFrom("m15733258105@163.com");
         javaMailSenderImpl.send(simpleMailMessage);
     }
 
@@ -65,7 +65,7 @@ public class MsmServiceImpl implements MsmService {
         simpleMailMessage.setSubject(msmVo.getParam().get("title") + "服务器报警");
         simpleMailMessage.setText(msmVo.getParam().get("service") + "服务器报警请即使处理");
         simpleMailMessage.setTo(msmVo.getPhone());
-        simpleMailMessage.setFrom("2590416618@qq.com");
+        simpleMailMessage.setFrom("m15733258105@163.com");
         javaMailSenderImpl.send(simpleMailMessage);
     }
 }

@@ -23,5 +23,30 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
+        <!--redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.18.0</version>
+        </dependency>
+        <!--hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.17</version>
+        </dependency>
     </dependencies>
+        <build>
+            <resources>
+                <resource>
+                    <directory>src/main/java</directory> <!-- .xml资源所在目录 -->
+                    <includes> <!-- 包括目录下的 .xml 文件-->
+                        <include>**/*.lua</include>
+                    </includes>
+                    <filtering>false</filtering> <!-- 暂时不需要管，加上就是了 -->
+                </resource>
+            </resources>
+        </build>
+
+
 </project>

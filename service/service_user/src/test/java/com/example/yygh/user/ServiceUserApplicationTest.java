@@ -25,7 +25,7 @@ public class ServiceUserApplicationTest {
         simpleMailMessage.setSubject("通知");
         simpleMailMessage.setText("这是通过spring-boot进行邮件通知测试");
         simpleMailMessage.setTo("2590416618@qq.com");
-        simpleMailMessage.setFrom("2590416618@qq.com");
+        simpleMailMessage.setFrom("m15733258105@163.com");
         javaMailSenderImpl.send(simpleMailMessage);
     }
 
